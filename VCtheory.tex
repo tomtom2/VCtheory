@@ -1,0 +1,86 @@
+\documentclass[a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{placeins}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{textcomp}
+
+%----- Package français
+\usepackage[utf8]{inputenc} %reconnaissance des accents
+\usepackage[francais]{babel} %document en français
+\usepackage[T1]{fontenc} %codage des fonts TeX ?
+
+
+
+%----- math
+\usepackage{amsmath}
+
+%----- images
+\usepackage{graphicx}
+
+\title{VC theory}
+%\author{Thomas BRIEN}
+%\date{28 janvier 2013}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+
+
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction} 
+Les différents concepts abordés sur la VC, ou Vapnik–Chervonenkis théorie:
+\begin{itemize}
+\item Dimension VC
+\item Pulvérisation
+\item Échantillon Fantôme
+\item Lemme de Sauer
+\end{itemize}
+On veut, avec une probabilité de $1 - \delta$:\\
+$ \forall f \in F $ R(f)$ \leq $\^R (f)$ + \epsilon(\delta, F, n) $\\
+
+\chapter*{chapitre}
+\addcontentsline{toc}{chapter}{chapitre}
+\section*{section}
+\addcontentsline{toc}{section}{section}
+\begin{tabbing}
+1990' $ \Rightarrow$ \=$Hypertext Markup Language$ (HTML)\\
+       \>$Hypertext Transfer Protocol$ (HTTP)\\
+\end{tabbing}
+
+\section*{Composition d'un site\\}
+\addcontentsline{toc}{section}{Composition d'un site}
+\begin{itemize}
+\item les liens entre deux documents du site
+\item les liens internes à un document
+\item les liens vers l extérieur
+\end{itemize}
+
+\section*{Un exemple\\}
+\addcontentsline{toc}{section}{Exemple}
+\begin{verbatim}
+<html><body>
+	<lu>
+		<li><a href="http://google.fr">lien vers Google</a></li>
+		<li><a href="b">aller à la page b</a></li>
+		<li><a href="#monAncre">aller à l'ancre</a></li>
+	</lu>
+	<div id="monAncre"></div>
+</body></html>
+\end{verbatim}
+
+\paragraph*{un paragraph}
+p
+
+
+\chapter*{Bibliographie}
+\addcontentsline{toc}{chapter}{Bibliographie}
+
+\end{document}
