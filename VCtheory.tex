@@ -20,6 +20,7 @@
 
 %----- math
 \usepackage{amsmath}
+\usepackage{dsfont}
 
 %----- images
 \usepackage{graphicx}
@@ -32,11 +33,13 @@
 \maketitle
 \tableofcontents
 
+\renewcommand{\thesection}{\arabic{section}}
+
 
 
 \chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction} 
-Les différents concepts abordés sur la VC, ou Vapnik–Chervonenkis théorie:
+Les différents concepts abordés sur la VC, ou Vapnik–Chervonenkis théorie: (fin 1970)
 \begin{itemize}
 \item Dimension VC
 \item Pulvérisation
@@ -45,17 +48,28 @@ Les différents concepts abordés sur la VC, ou Vapnik–Chervonenkis théorie:
 \end{itemize}
 On veut, avec une probabilité de $1 - \delta$:\\
 $ \forall f \in F $ R(f)$ \leq $\^R (f)$ + \epsilon(\delta, F, n) $\\
-
-\chapter*{chapitre}
-\addcontentsline{toc}{chapter}{chapitre}
-\section*{section}
-\addcontentsline{toc}{section}{section}
 \begin{tabbing}
-1990' $ \Rightarrow$ \=$Hypertext Markup Language$ (HTML)\\
-       \>$Hypertext Transfer Protocol$ (HTTP)\\
+avec : \= R(f) = $\mathds{P}_{X,Y \sim D}$(f(x)$\neq$y)\\
+\> \^R(f) = $\frac{1}{n}\displaystyle { \sum_{i=1}^{n}}( \mathds{1}_{f(x_i)\neq y_i} $)\\
 \end{tabbing}
 
-\section*{Composition d'un site\\}
+\chapter*{Dimension VC}
+\addcontentsline{toc}{chapter}{chapitre}
+
+\section{Rappels et quelques exemples}
+\addcontentsline{toc}{section}{section}
+L'orsque |F| < $ +\infty $: avec proba 1-$ \delta $\\
+$ \forall $ f $ \in $ F R(f)$ \leq $\^R(f) + $\sqrt{\frac{2}{n}*\log\frac{|F|}{\delta}}$\\
+\newline
+\underline{Preuve}:\\
+\begin{itemize}
+\item pour f fixé: $\mathds{P}$
+\item les liens internes à un document
+\item les liens vers l extérieur
+\end{itemize}
+
+
+\section{Composition d'un site\\}
 \addcontentsline{toc}{section}{Composition d'un site}
 \begin{itemize}
 \item les liens entre deux documents du site
