@@ -21,6 +21,7 @@
 %----- math
 \usepackage{amsmath}
 \usepackage{dsfont}
+\usepackage{calrsfs}
 
 %----- images
 \usepackage{graphicx}
@@ -35,6 +36,20 @@
 
 \renewcommand{\thesection}{\arabic{section}}
 
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemme}
+
+\renewcommand{\thetheorem}{\empty{}}
+\renewcommand{\thelemma}{\empty{}} 
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Rq:]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
 
 
 \chapter*{Introduction}
@@ -54,47 +69,75 @@ avec : \= R(f) = $\mathds{P}_{X,Y \sim D}$(f(x)$\neq$y)\\
 \end{tabbing}
 
 \chapter*{Dimension VC}
-\addcontentsline{toc}{chapter}{chapitre}
+\addcontentsline{toc}{chapter}{Dimension VC}
 
 \section{Rappels et quelques exemples}
-\addcontentsline{toc}{section}{section}
-L'orsque |F| < $ +\infty $: avec proba 1-$ \delta $\\
+\subsection*{Rappels}
+Lorsque |F| < $ +\infty $: avec proba 1-$ \delta $\\
 $ \forall $ f $ \in $ F R(f)$ \leq $\^R(f) + $\sqrt{\frac{2}{n}*\log\frac{|F|}{\delta}}$\\
 \newline
 \underline{Preuve}:\\
 \begin{itemize}
-\item pour f fixé: $\mathds{P}$
-\item les liens internes à un document
-\item les liens vers l extérieur
+\item[$\bullet$] pour f fixé: $\mathds{P}($R(f)-\^R(f)$\geq \epsilon)\leq \exp ^{-2n\epsilon ^2}$
+\item[$\bullet$] Borne de l'union: $\mathds{P}(\exists f\in F$ R(f)-\^R(f)$\geq \epsilon)\leq $ |F|$\exp ^{-2n\epsilon ^2}$\\
 \end{itemize}
 
+\begin{tiny}
+Rappel du problème:\\
+S = \{($X_i$, $Y_i)\}_{i=1}^n$ IID $ \sim $ D\\
+\^R(f) = $\frac{1}{n}\displaystyle { \sum_{i=1}^{n}}( \mathds{1}_{f(x_i)\neq y_i} $)\\
+R(f) = $\mathds{E}(\mathds{1}_{ f(x)\neq y })$ = $\mathds{P}$(f(x)$\neq$y)\\
+\end{tiny}
 
-\section{Composition d'un site\\}
-\addcontentsline{toc}{section}{Composition d'un site}
+
+\subsection*{Exemples sur deux classes de fonctions}
 \begin{itemize}
-\item les liens entre deux documents du site
-\item les liens internes à un document
-\item les liens vers l extérieur
+\item[$\bullet$] $F_1 = \{f:\ f(x)=\mathds{1}_{x\geq t},\ t\in \mathds{R}\}
+\ \cup \ \{f:\ f(x)=\mathds{1}_{x\leq t},\ t\in \mathds{R}\}$\\
 \end{itemize}
 
-\section*{Un exemple\\}
-\addcontentsline{toc}{section}{Exemple}
-\begin{verbatim}
-<html><body>
-	<lu>
-		<li><a href="http://google.fr">lien vers Google</a></li>
-		<li><a href="b">aller à la page b</a></li>
-		<li><a href="#monAncre">aller à l'ancre</a></li>
-	</lu>
-	<div id="monAncre"></div>
-</body></html>
-\end{verbatim}
+\begin{itemize}
+\item[$\bullet$] $F_2 = \{f:\ f(x)=\mathds{1}_{x\in A},\ A=[a,b]\times[c,d],\ a,b,c,d\ \in \ \mathds{R}\}$\\
+\end{itemize}
 
-\paragraph*{un paragraph}
-p
+\section{Théorème principale}
+\begin{itemize}
+\item[$\bullet$] F est une classe de fonctions $ \subseteq \mathcal{Y}^\mathcal{X}$\\
+\item[$\bullet$] $\mathcal{N}_F (x_1..x_n)$ = $\{[f(x_1)..f(x_n)]\in \{0,i\}^n \ ,f\in F\}$\\
+\end{itemize}
 
+\begin{definition}
+Coefficient de pulverisation $\mathcal{S}$(F, n)\\
+$\mathcal{S}$(F,n) = $\underset{x_1..x_n}{max}|\mathcal{N}_F (x_1..x_n)|$\\
+\end{definition}
 
-\chapter*{Bibliographie}
-\addcontentsline{toc}{chapter}{Bibliographie}
+\begin{remark}
+$\mathcal{S}$(F,n) $ \leq 2^n$ mais bien souvent $\mathcal{S}$(F,n) $ \lll 2^n $\\
+\end{remark}
+
+\begin{definition}
+Dimension de Vapnik–Chervonenkis\\
+le plus grand k tq. $\mathcal{S}$(F,k) = $2^k$\\
+\end{definition}
+
+La VC dimension d'une classe de fonctions F, qu'on  notera VCdim(F), mesure la "richesse" de cette classe.\\
+Si on revient sur nos exemples précédents:
+\begin{itemize}
+\item[]VCdim($F_1$) = 2
+\item[]VCdim($F_1$) = 4\\
+\end{itemize}
+
+\begin{theorem}
+VC (1979):\\
+$\mathds{P}(sup|$\^R(f)-R(f)$| > \epsilon)\ \leq \ 8\mathcal{S}(F,n) \exp ^{-\frac{n\epsilon^2}{32}}$\\
+$\mathds{P}(\exists f \in F:\ |$\^R(f)-R(f)$| > \epsilon)\ \leq \ 8\mathcal{S}(F,n)\exp ^{-\frac{n\epsilon^2}{32}}$\\
+\end{theorem}
+
+\begin{lemma}
+Sauer-Shelah:\\
+$\mathcal{S}$(F,n) $ \leq (n+1)^{VCdim(F)}$
+\end{lemma}
+
+\section{Preuve du théorème principale}
 
 \end{document}
