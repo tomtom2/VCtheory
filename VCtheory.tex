@@ -31,7 +31,7 @@
 %\date{28 janvier 2013}
 
 \begin{document}
-\maketitle
+%\maketitle
 \tableofcontents
 
 \renewcommand{\thesection}{\arabic{section}}
@@ -49,6 +49,8 @@
 \newenvironment{example}[1][Example]{\begin{trivlist}
 \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
 \newenvironment{remark}[1][Rq:]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{rappel}[1][rappel:]{\begin{trivlist}
 \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
 
 
@@ -120,11 +122,11 @@ Dimension de Vapnik–Chervonenkis\\
 le plus grand k tq. $\mathcal{S}$(F,k) = $2^k$\\
 \end{definition}
 
-La VC dimension d'une classe de fonctions F, qu'on  notera VCdim(F), mesure la "richesse" de cette classe.\\
+La VC dimension d'une classe de fonctions F, qu'on  notera VC(F), mesure la "richesse" de cette classe.\\
 Si on revient sur nos exemples précédents:
 \begin{itemize}
-\item[]VCdim($F_1$) = 2
-\item[]VCdim($F_1$) = 4\\
+\item[]VC($F_1$) = 2
+\item[]VC($F_1$) = 4\\
 \end{itemize}
 
 \begin{theorem}
@@ -135,9 +137,53 @@ $\mathds{P}(\exists f \in F:\ |$\^R(f)-R(f)$| > \epsilon)\ \leq \ 8\mathcal{S}(F
 
 \begin{lemma}
 Sauer-Shelah:\\
-$\mathcal{S}$(F,n) $ \leq (n+1)^{VCdim(F)}$
+$\mathcal{S}$(F,n) $ \leq (n+1)^{VC(F)}$
 \end{lemma}
 
 \section{Preuve du théorème principale}
+\begin{itemize}
+\item[$\bullet$]On note \~f = $\underset{f\in F}{argmax}$|\^R(f)-R(f)|\\
+\end{itemize}
+\underline{Étape 1}:\\
+$\mathds{P}(\underset{f\in F}{sup}|$\^R(f)-R(f)$| > \epsilon)\ \leq 2\mathds{P}_{SS'}(\underset{f\in F}{sup}|$\^R$_S(f)-$\^R$_{S'}(f)| > \frac{\epsilon}{2})$\\
+\begin{tabbing}
+$\mathds{P}(\underset{f\in F}{sup}|$\^R$_S(f)-$\^R$_{S'}(f)| \geq \frac{\epsilon}{2})$ \= $\geq \mathds{P}(|$\^R$_S($\~f$)-$\^R$_{S'}($\~f$)| \geq \frac{\epsilon}{2})$\\
+\> $\geq \mathds{P}(|$\^R$_S($\~f$)-$R$($\~f$)| > \epsilon\ et\ |$\^R$_{S'}($\~f$)-$R$($\~f$)| < \frac{\epsilon}{2})$\\
+\end{tabbing}
+= $ \mathds{E}[\mathds{1}\{|$\^R$_S($\~f$)-$R$($\~f$)|>\epsilon\}\mathds{1}\{|$\^R$_{S'}($\~f$)-$R$($\~f$)|>\frac{\epsilon}{2}\}] $\\
+= $ \mathds{E}_S \mathds{E}_{S|S'}[...] $\\
+= $ \mathds{E}_S[\mathds{1}\{|$\^R$_S($\~f$)-$R$($\~f$)|\geq \epsilon\}\times \mathds{E}_{S|S'}\mathds{1}\{|$\^R$_{S'}($\~f$)-$R$($\~f$)|\leq \frac{\epsilon}{2}\}] $\\
+= $ \mathds{E}_S[\mathds{1}\{|$\^R$_S($\~f$)-$R$($\~f$)|\geq \epsilon\}\ \mathds{P}_{S'|S}(|$\^R$_{S'}($\~f$)-$R$($\~f$)|\leq \frac{\epsilon}{2})] $\\
+
+\begin{itemize}
+\item[$\bullet$]supposons que S soit fixé:\\
+\end{itemize}
+\begin{tabbing}
+\^R$_{S'}$(\~f)-R(\~f) \= = $\frac{1}{n}\displaystyle { \sum_{i=1}^{n}}[\mathds{1}\{$\~f$(x_i)\neq y_i'\}-\underset{X_i', Y_i'|S}{\mathds{E}}\mathds{1}\{$\~f$(X_i')\neq Y_i'\}]$\\
+\> = $\frac{1}{n}\displaystyle{\sum_{i=1}^{n}}$ $\bigsqcup _{i|S}$\\
+\> avec $\bigsqcup $, variable aléatoire IID, $\mathds{E}\bigsqcup _i = 0$\\
+\end{tabbing}
+\begin{rappel}
+inégalité de Chebychev\\
+Soit une v.a Z d’espérance $\mu $ et de variance $\sigma^2$\\
+$\mathds{P}(|Z-\mu|\geq \alpha)\leq \frac{\sigma^2}{\alpha^2} $\\
+\end{rappel}
+
+\begin{tabbing}
+$\mathds{P}_{S'|S}$\=$(|$\^R$_{S'}($\~f$)-$R$($\~f$)|< \frac{\varepsilon}{2})$\\
+\> = $\mathds{P}_{S'|S}(|\frac{1}{n}\displaystyle{\sum_{i=1}^{n}}$ $\bigsqcup _{i}|< \frac{\varepsilon}{2})$\\
+\> = $\mathds{P}_{S'|S}(|\sum \bigsqcup _{i}|< \frac{n \varepsilon}{2})$\\
+\> = $\geq 1 - \frac{4}{n^2 \varepsilon ^2}\underset{S|S'}{var}(|\displaystyle{\sum_{i=1}^{n}}$ $ \bigsqcup _{i}|)$\\
+\> = $\geq 1 - \frac{4}{n^2 \varepsilon ^2}\ n\times \underset{X_i', Y_i'}{var}(| \bigsqcup _{i}|)$\\
+\> = $\geq 1 - \frac{4}{n^2 \varepsilon ^2}\ n\times \frac{1}{4}$ = $ 1 - \frac{4}{n \varepsilon ^2} \geq \frac{1}{2}$\\
+\end{tabbing}
+Si on fait l'hypothèse que $n\varepsilon ^2 \geq 2$\\
+NB: $\frac{1}{4}$ est la variance maximale d'une variable de Bernoulli.\\
+\newline
+\underline{On a donc}:\\
+
+
+
+
 
 \end{document}
