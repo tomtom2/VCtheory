@@ -97,12 +97,18 @@ R(f) = $\mathds{E}(\mathds{1}_{ f(x)\neq y })$ = $\mathds{P}$(f(x)$\neq$y)\\
 \item[$\bullet$] $F_1 = \{f:\ f(x)=\mathds{1}_{x\geq t},\ t\in \mathds{R}\}
 \ \cup \ \{f:\ f(x)=\mathds{1}_{x\leq t},\ t\in \mathds{R}\}$\\
 \end{itemize}
+$\rightarrow$ De combien de façons différentes peut-on étiqueter $x_1...x_n \in \mathds{R}$ grâce à $F_1$ ?\\
+--> 2n ($\lll 2^n$)\\
 
 \begin{itemize}
 \item[$\bullet$] $F_2 = \{f:\ f(x)=\mathds{1}_{x\in A},\ A=[a,b]\times[c,d],\ a,b,c,d\ \in \ \mathds{R}\}$\\
 \end{itemize}
+$\rightarrow$ 2 points: toutes les 4 affectations sont réalisables (pulvérisable)\\
+$\rightarrow$ 4 points (non alignés): toutes les 16 affectations sont réalisables (pulvérisable)\\
+$\rightarrow$ 5 points: aucune configuration de 5 points n'est pulvérisée par $F_2$\\
 
-\section{Théorème principale}
+
+\section{Théorème principal}
 \begin{itemize}
 \item[$\bullet$] F est une classe de fonctions $ \subseteq \mathcal{Y}^\mathcal{X}$\\
 \item[$\bullet$] $\mathcal{N}_F (x_1..x_n)$ = $\{[f(x_1)..f(x_n)]\in \{0,i\}^n \ ,f\in F\}$\\
@@ -140,7 +146,7 @@ Sauer-Shelah:\\
 $\mathcal{S}$(F,n) $ \leq (n+1)^{VC(F)}$
 \end{lemma}
 
-\section{Preuve du théorème principale}
+\section{Preuve du théorème principal}
 \begin{itemize}
 \item[$\bullet$]On note \~f = $\underset{f\in F}{argmax}$|\^R(f)-R(f)|\\
 \end{itemize}
@@ -181,9 +187,69 @@ Si on fait l'hypothèse que $n\varepsilon ^2 \geq 2$\\
 NB: $\frac{1}{4}$ est la variance maximale d'une variable de Bernoulli.\\
 \newline
 \underline{On a donc}:\\
+$\mathds{P}(\underset{f\in F}{sup}|$\^R$_S(f)-$\^R$_{S'}(f)|>\frac{\varepsilon}{2})\geq \mathds{E}[\mathds{1}\{|$\^R$_S($\~f$)-$R$($\~f$)|>\varepsilon \}\ \mathds{P}_{S'|S}(|$\^R$_{S'}($\~f$)-$R$($\~f$)|>\frac{\varepsilon}{2})]$\\
+$\geq \frac{1}{2} \mathds{E}[\mathds{1}\{|$\^R$_{S}($\~f$)-$R$($\~f$)|>\varepsilon\}]$\\
+= $\frac{1}{2}\mathds{P}(|$\^R$_{S}($\~f$)-$R$($\~f$)|>\varepsilon) $\\
+\newline
+$\geq \frac{1}{2} \mathds{P}_S(\underset{f\in F}{sup}|$\^R$_{S}($f$)-$R$($f$)|>\varepsilon) $\\
+\newline
+et donc:\\
+$ \mathds{P}_S(\underset{f\in F}{sup}|$\^R$_{S}($f$)-$R$($f$)|>\varepsilon)\ \leq \ 2\mathds{P}_{SS'}(\underset{f\in F}{sup}|$\^R$_{S}($f$)-$\^R$_{S'}($f$)|\geq \frac{\varepsilon}{2}) $\\
+\begin{remark}
+Dans cette dernière expression, S' est appelé un échantillon fantôme.\\
+\end{remark}
 
+\underline{Étape 2: Symétrisation}:\\
+$ \mathds{P}_{SS'}(\underset{f\in F}{sup}|\frac{1}{n}\displaystyle {\sum_{i=1}^n}\mathds{1}\{f(x_i)\neq y_i\}-\frac{1}{n}\displaystyle {\sum_{i=1}^n}\mathds{1}\{f(X_i)\neq Y_i\}|\geq \frac{\varepsilon}{2}) $\\
+= $ \mathds{P}_{SS'}(\underset{f\in F}{sup}\frac{1}{n}|\displaystyle {\sum_{i=1}^n}(\mathds{1}\{f(x_i)\neq y_i\}-\mathds{1}\{f(X_i)\neq Y_i\})|\geq \frac{\varepsilon}{2}) $\\
+= $ \mathds{P}_{SS'\underline{\sigma}}(\underset{f\in F}{sup}\frac{1}{n}|\displaystyle {\sum_{i=1}^n}\sigma_i(\mathds{1}\{f(x_i)\neq y_i\}-\mathds{1}\{f(X_i)\neq Y_i\})|\geq \frac{\varepsilon}{2}) $\\
+\newline
+avec $\underline{\sigma}$ séquences $\sigma_1...\sigma_n$ de variables de Rademacher indépendantes:\\
+$\mathds{P}(\sigma_i=+1)$ = $\mathds{P}(\sigma_i=-1)$ = $\frac{1}{2}$\\
+\newline
+$\leq \mathds{P}_{SS'\underline{\sigma}}(\underset{f\in F}{sup}\frac{1}{n}|\displaystyle {\sum_{i=1}^n}\sigma_i \mathds{1}\{f(x_i)\neq y_i\}|>\frac{\varepsilon}{4}\ ou\ \underset{f\in F}{sup}\frac{1}{n}|\displaystyle {\sum_{i=1}^n}\sigma_i \mathds{1}\{f(X_i)\neq Y_i\}|>\frac{\varepsilon}{4}) $\\
+$\leq 2\mathds{P}_{S\sigma}(\underset{f\in F}{sup}\frac{1}{n}|\displaystyle {\sum_{i=1}^n}\sigma_i \mathds{1}\{f(X_i)\neq Y_i\}|\geq \frac{\varepsilon}{4}) $\\
+\newline
+On en est donc à:\\
+\fbox{
+\begin{minipage}{1\textwidth}
+   $\mathds{P}(\underset{f\in F}{sup}|$\^R$_{S}($f$)-$R$($f$)|>\varepsilon) \leq 4\mathds{P}_{S\sigma}(\underset{f\in F}{sup}\frac{1}{n}|\displaystyle {\sum_{i=1}^n}\sigma_i \mathds{1}\{f(X_i)\neq Y_i\}|\geq \frac{\varepsilon}{4})$
+\end{minipage}
+}
+\newline
+\underline{Étape 3}: conclusion\\
+\begin{itemize}
+\item[$\bullet$]On s'intéresse à: $\frac{1}{n}|\displaystyle {\sum_{i=1}^n}\sigma_i \mathds{1}\{f(X_i)\neq Y_i\}|$\\
+\item[$\bullet$]On suppose que $x_1...x_n$ et $y_1...y_n$ sont fixés.
+\end{itemize}
+Le vecteur (f($x_1$)...f($x_n$)) peut prendre au maximum $\mathcal{S}$(F,n) valeurs différentes.\\
+\newline
+Et donc:\\
+($\mathds{1}\{$f($x_1$)$\neq y_1\}$...$\mathds{1}\{$f($x_n$)$\neq y_n\}$) peut prendre au maximum $\mathcal{S}$(F,n) valeurs différentes.\\
+\newline
+\begin{itemize}
+\item[$\bullet$]$F_{x_1..x_n}\ \subseteq \ F$ le plus petit sous ensemble de $F$ tel que:\\
+$\mathcal{N}_{F_{x_1..x_n}}(x_1..x_n) = \mathcal{N}_F(x_1..x_n)$\\
+\end{itemize}
+$\mid F_{x_1..x_n} \mid \ \leq \ \mathcal{S}$(F,n)\\
+\newline
+$ \mathds{P}(\underset{f\in F}{sup}\frac{1}{n}|\displaystyle {\sum_{i=1}^n}\sigma_i \mathds{1}\{f(x_i)\neq y_i\}|\geq \frac{\varepsilon}{4})$
+= $\mathds{P}(\underset{f\in F_{x_1..x_n}}{max}\frac{1}{n}|\displaystyle {\sum_{i=1}^n}\sigma_i \mathds{1}\{f(x_i)\neq y_i\}|\geq \frac{\varepsilon}{4})$\\
+= $\mathds{P}(\underset{f\in F_{x_1..x_n}}{\cup}\{\frac{1}{n}|\displaystyle {\sum_{i=1}^n}\sigma_i \mathds{1}\{f(x_i)\neq y_i\}|\geq \frac{\varepsilon}{4}\})$\\
+$\leq \displaystyle {\sum_{f\in F_{x_1..x_n}}} \mathds{P}(\frac{1}{n}|\displaystyle {\sum_{i=1}^n}\sigma_i \mathds{1}\{f(x_i)\neq y_i\}|> \frac{\varepsilon}{4})$ (borne de l'union)\\
+$\leq \mid F_{x_1..x_n} \mid \underset{f\in F_{x_1..x_n}}{sup} \mathds{P}(\frac{1}{n}|\displaystyle {\sum_{i=1}^n}\sigma_i \mathds{1}\{f(x_i)\neq y_i\}|> \frac{\varepsilon}{4}) $\\
 
-
-
+$\leq \mathcal{S}(F,n) \underset{f\in F}{sup} \mathds{P}(\frac{1}{n}|\displaystyle {\sum_{i=1}^n}\sigma_i \mathds{1}\{f(x_i)\neq y_i\}|> \frac{\varepsilon}{4}) $\\
+\newline
+\underline{Étape 4}: Hoeffding ($x_i$ et $y_i$ fixés)\\
+$\frac{1}{n}|\displaystyle {\sum_{i=1}^n}\underbrace{\sigma_i \mathds{1}\{f(X_i)\neq Y_i\}}_{A_i}|$\\
+$A_i$ variable aléatoire (dépend de $\sigma_i$)\\
+$A_i \in [-1, 1]$\\
+$\mathds{E}A_i=0$\\
+$A_i = \sigma_i K_i$\\
+$\mathds{E}A_i = +1K_i \times \mathds{P}(\sigma_i=+1)-1K_i \times \mathds{P}(\sigma_i=-1)$ = $K_i \times \frac{1}{2}-K_i \times \frac{1}{2} = 0 $\\
+\newline
+$\mathds{P}(|\displaystyle {\sum_{i=1}^n}\sigma_i \mathds{1}\{f(x_i)\neq y_i\}|\geq \frac{n\varepsilon}{4})\leq 2exp(-\frac{2(\frac{n\varepsilon}{4})^2}{\displaystyle{\sum_{i=1}^n}(max\ A_i-min\ A_i)^2})$\\
+$\leq 2exp(-\frac{2(\frac{n\varepsilon}{4})^2}{n\times4})= 2exp(-\frac{(\frac{n\varepsilon}{4})^2}{32})$\\
 
 \end{document}
